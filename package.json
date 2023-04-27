@@ -1,0 +1,50 @@
+{
+  "name": "next-restore-scroll-position",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "url": "https://github.com/MichalSzorad/next-restore-scroll-position",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "tsup": {
+    "dts": true,
+    "bundle": false,
+    "treeshake": true,
+    "target": "node16",
+    "format": [
+      "esm",
+      "cjs"
+    ],
+    "entry": [
+      "src/**/*.ts"
+    ]
+  },
+  "keywords": [],
+  "author": "Michal Szorád",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.16.1",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4",
+    "prettier": "^2.8.8"
+  },
+  "dependencies": {
+
+  },
+  "peerDependencies": {
+    "react": "^16 || ^17 || ^18",
+    "next": "^13"
+  }
+}
