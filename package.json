@@ -1,6 +1,6 @@
 {
   "name": "next-restore-scroll-position",
-  "version": "1.0.6",
+  "version": "1.0.9",
   "description": "Restores scroll position when navigating back and forth in NextJS",
   "main": "dist/index.cjs",
   "url": "https://github.com/MichalSzorad/next-restore-scroll-position",

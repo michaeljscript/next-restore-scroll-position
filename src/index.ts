@@ -4,8 +4,8 @@ import { deleteScrollPos, restoreScrollPos, saveScrollPos } from './storage'
 interface Router {
   asPath: string
   events: {
-    on: (event: string | 'routeChangeStart' | 'routeChangeComplete', callback: (data: any) => void) => void
-    off: (event: string | 'routeChangeStart' | 'routeChangeComplete', callback: (data: any) => void) => void
+    on: (event: any, callback: (data?: any) => void) => void
+    off: (event: any, callback: (data?: any) => void) => void
   }
   beforePopState: (callback: () => boolean) => void
 }
