@@ -18,6 +18,10 @@
     },
     "./package.json": "./package.json"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichalSzorad/next-restore-scroll-position.git"
+  },
   "tsup": {
     "dts": true,
     "bundle": false,
