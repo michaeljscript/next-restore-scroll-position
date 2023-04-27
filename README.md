@@ -15,6 +15,8 @@ npm i next-restore-scroll-position
 
 ## Usage
 ```js
+import { useScrollRestoration } from 'next-restore-scroll-position';
+
 function App() { // This needs to be NextJS App Component
     const router = useRouter();
     useScrollRestoration(router);
@@ -24,6 +26,8 @@ function App() { // This needs to be NextJS App Component
 **You can also disable the scroll restoration by passing `enabled` property**
 
 ```js
+import { useScrollRestoration } from 'next-restore-scroll-position';
+
 function App() { // This needs to be NextJS App Component
     const router = useRouter();
     useScrollRestoration(router, {enabled: false});
