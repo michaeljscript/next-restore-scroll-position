@@ -1,6 +1,6 @@
 {
   "name": "next-restore-scroll-position",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "url": "https://github.com/MichalSzorad/next-restore-scroll-position",
@@ -22,6 +22,7 @@
     "type": "git",
     "url": "git+https://github.com/MichalSzorad/next-restore-scroll-position.git"
   },
+  "types": "./dist/index.d.ts",
   "tsup": {
     "dts": true,
     "bundle": false,
