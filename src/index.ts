@@ -1,8 +1,16 @@
-import Router, { NextRouter } from 'next/router'
 import { useEffect, useRef } from 'react'
 import { deleteScrollPos, restoreScrollPos, saveScrollPos } from './storage'
 
-export function useScrollRestoration(router: NextRouter, { enabled = true }: { enabled?: boolean } = {}) {
+interface Router {
+  asPath: string
+  events: {
+    on: (event: string | 'routeChangeStart' | 'routeChangeComplete', callback: (data: any) => void) => void
+    off: (event: string | 'routeChangeStart' | 'routeChangeComplete', callback: (data: any) => void) => void
+  }
+  beforePopState: (callback: () => boolean) => void
+}
+
+export function useScrollRestoration(router: Router, { enabled = true }: { enabled?: boolean } = {}) {
   const shouldRestoreRef = useRef(false)
 
   useEffect(() => {
@@ -33,18 +41,18 @@ export function useScrollRestoration(router: NextRouter, { enabled = true }: { e
     }
 
     window.addEventListener('beforeunload', onBeforeUnload)
-    Router.events.on('routeChangeStart', onRouteChangeStart)
-    Router.events.on('routeChangeComplete', onRouteChangeComplete)
-    Router.beforePopState(() => {
+    router.events.on('routeChangeStart', onRouteChangeStart)
+    router.events.on('routeChangeComplete', onRouteChangeComplete)
+    router.beforePopState(() => {
       shouldRestoreRef.current = true
       return true
     })
 
     return () => {
       window.removeEventListener('beforeunload', onBeforeUnload)
-      Router.events.off('routeChangeStart', onRouteChangeStart)
-      Router.events.off('routeChangeComplete', onRouteChangeComplete)
-      Router.beforePopState(() => true)
+      router.events.off('routeChangeStart', onRouteChangeStart)
+      router.events.off('routeChangeComplete', onRouteChangeComplete)
+      router.beforePopState(() => true)
     }
   }, [router, enabled])
 }
