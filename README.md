@@ -23,7 +23,8 @@ function App() { // This needs to be NextJS App Component
 }
 ```
 
-**If your app limits content scrolling to a particular DOM element**
+**If your app limits content scrolling to a particular DOM element.**
+
 When only a portion of the page scrolls, rather than normal full window scrolling, you can pass the `scrollAreaId` property
 
 scrollAreaId is the id of the element that scrolls. If you have a div with `id="divThatScrolls"`, you would pass scrollAreaId="divThatScrolls as in the following example."
