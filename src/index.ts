@@ -10,35 +10,54 @@ interface Router {
   beforePopState: (callback: () => boolean) => void
 }
 
-export function useScrollRestoration(router: Router, { enabled = true }: { enabled?: boolean } = {}) {
+interface ScrollRestorationOptions {
+  scrollAreaId?: null|string
+  enabled?: boolean
+}
+
+export function useScrollRestoration(router: Router, { scrollAreaId=null, enabled = true}:ScrollRestorationOptions={}) {
   const shouldRestoreRef = useRef(false)
 
   useEffect(() => {
+
     if (!enabled) return
+
     if (!('scrollRestoration' in window.history)) return
     window.history.scrollRestoration = 'manual'
     // restoreScrollPos(router.asPath);
 
     const onBeforeUnload = (event: BeforeUnloadEvent) => {
-      saveScrollPos(router.asPath)
+      saveScrollPos(router.asPath, scrollAreaId)
       delete event['returnValue']
     }
 
     const onRouteChangeStart = () => {
-      saveScrollPos(router.asPath)
+      saveScrollPos(router.asPath, scrollAreaId)
     }
 
     const onRouteChangeComplete = (url: string) => {
+      
+
       if (shouldRestoreRef.current) {
         shouldRestoreRef.current = false
         /**
          * Calling with relative url, not expected asPath, so this
          * will break if there is a basePath or locale path prefix.
          */
-        restoreScrollPos(url)
+        restoreScrollPos(url, scrollAreaId)
         deleteScrollPos(url)
+
+      } else{
+
+        // we don't want to restore a previous position, but we may need to reset scroll to top
+        if (scrollAreaId && enabled){
+          const scrollArea = document.getElementById(scrollAreaId);
+          if (scrollArea){
+            scrollArea.scrollTo(0, 0);
+          }
       }
     }
+  }
 
     window.addEventListener('beforeunload', onBeforeUnload)
     router.events.on('routeChangeStart', onRouteChangeStart)
