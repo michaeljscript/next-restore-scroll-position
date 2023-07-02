@@ -3,7 +3,7 @@ export const getStorage = () => sessionStorage
 export const saveScrollPos = (asPath: string, scrollAreaId:null|string) => {
     try {
         let scrollPos = null
-        let scrollArea = null
+        let scrollArea: HTMLElement|null = null
 
         if (scrollAreaId){
             scrollArea = document.getElementById(scrollAreaId)
