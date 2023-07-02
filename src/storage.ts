@@ -10,19 +10,13 @@ export const saveScrollPos = (asPath: string, scrollAreaId:null|string) => {
         }
 
         if (scrollArea){
-
             scrollPos = { x:scrollArea.scrollLeft , y: scrollArea.scrollTop }
-
         } else {
-
             scrollPos = { x: window.scrollX, y: window.scrollY }
-
         }
 
         if(scrollPos){
-
             getStorage().setItem(`scrollPos:${asPath}`, JSON.stringify(scrollPos))
-               
         }
 
     // eslint-disable-next-line no-empty
@@ -38,7 +32,6 @@ export const restoreScrollPos = (asPath: string, scrollAreaId:null|string) => {
     let scrollArea: HTMLElement|Window|null  = null
     
     if (scrollAreaId){
-        
         scrollArea = document.getElementById(scrollAreaId)
     }
 
